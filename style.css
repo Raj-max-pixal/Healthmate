@@ -1,0 +1,577 @@
+:root {
+    --primary-color: #7E57C2;
+    /* Soft Purple/Blue as main */
+    --primary-light: #EDE7F6;
+    --pastel-pink: #F8BBD0;
+    --pastel-blue: #BBDEFB;
+    --pastel-green: #C8E6C9;
+    --pastel-orange: #FFE0B2;
+    --bg-color: #FAFAFA;
+    --text-dark: #2c3e50;
+    --text-light: #95a5a6;
+    --white: #ffffff;
+    --radius: 20px;
+    --shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    --font-main: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #f3f4f6;
+    margin: 0;
+    /* Reset */
+    overflow-x: hidden;
+    /* Remove flex center for desktop feel */
+    display: block;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 100%;
+    /* Full width */
+    min-height: 100vh;
+    /* Full height */
+    background-color: var(--white);
+    position: relative;
+    display: flex;
+    /* Mobile: Column */
+    flex-direction: column;
+    box-shadow: none;
+    /* remove phone shadow */
+    border: none;
+    border-radius: 0;
+}
+
+/* DESKTOP LAYOUT (Professional Dashboard) */
+@media (min-width: 1024px) {
+    body {
+        background-color: #f3f4f6;
+        /* Ensure background is consistent */
+    }
+
+    .app-container {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        /* Sidebar width increased slightly */
+        grid-template-rows: auto 1fr;
+        max-width: 1600px;
+        /* Max constraint for ultra-wide monitors */
+        margin: 0 auto;
+        /* Center app on ultra-wide */
+        background: transparent;
+        /* Let body bg show through gaps if any */
+        min-height: 100vh;
+    }
+
+    /* Header */
+    .app-header {
+        grid-column: 2 / -1;
+        padding: 24px 40px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        margin-top: 0;
+        display: flex;
+        justify-content: flex-end;
+        /* Align profile to right */
+        gap: 20px;
+    }
+
+    /* Move User Profile to right in header */
+    .app-header .user-profile {
+        order: 2;
+    }
+
+    .app-header .icon-btn {
+        order: 1;
+        margin-right: auto;
+        /* Push notification bell to left of profile or keep right? Let's keep right */
+        margin-right: 0;
+    }
+
+    /* Actually, let's keep original HTML order but refine spacing */
+
+
+    /* Sidebar (Navigation) */
+    .bottom-nav {
+        grid-row: 1 / -1;
+        grid-column: 1 / 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 40px 24px;
+        background: var(--white);
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        border-radius: 0;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.02);
+        z-index: 101;
+        gap: 12px;
+        width: 100%;
+        /* Fill grid col */
+    }
+
+    /* Sidebar Logo Injection */
+    .bottom-nav::before {
+        content: "HealthMate";
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        margin-bottom: 40px;
+        padding-left: 12px;
+        display: block;
+        width: 100%;
+    }
+
+    /* Nav Items Desktop Style */
+    .nav-item {
+        flex-direction: row;
+        width: 100%;
+        padding: 16px 20px;
+        border-radius: 16px;
+        gap: 16px;
+        color: var(--text-light);
+        transition: all 0.2s ease;
+    }
+
+    .nav-item:hover {
+        background-color: var(--bg-color);
+        color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+    .nav-item.active {
+        background-color: var(--primary-light);
+        color: var(--primary-color);
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(126, 87, 194, 0.15);
+        /* Soft shadow matching primary */
+    }
+
+    .nav-item .material-icons-round {
+        font-size: 24px;
+    }
+
+    /* Reveal text label via attribute */
+    .nav-item::after {
+        content: attr(data-label);
+        font-size: 1rem;
+    }
+
+    /* Content Area */
+    .content-area {
+        grid-column: 2 / -1;
+        padding: 40px;
+        width: 100%;
+        max-width: 1200px;
+        /* Constrain content width for readability */
+        margin: 0 auto;
+        /* Center content in the column */
+        /* Override mobile padding-bottom */
+        padding-bottom: 60px;
+    }
+
+    /* Search Bar Adjustment */
+    .search-bar {
+        max-width: 600px;
+        margin-bottom: 40px;
+        background: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Dashboard Grid */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 Columns on standard desktop */
+        gap: 24px;
+    }
+
+    /* Hero Banner spans all */
+    .hero-banner {
+        grid-column: 1 / -1;
+        min-height: 200px;
+    }
+
+    /* Feature cards shouldn't be too huge */
+    .card {
+        min-height: 180px;
+        padding: 24px;
+    }
+
+    /* Make text scale slightly */
+    .card h3 {
+        font-size: 1.1rem;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 columns on wide screens */
+    }
+}
+
+/* Header */
+.app-header {
+    background: transparent;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    background: #E1BEE7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.user-info h4 {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.user-info h2 {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.icon-btn {
+    background: var(--bg-color);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Content Area */
+.content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 24px 100px 24px;
+    /* Bottom padding for nav */
+}
+
+/* Search Bar */
+.search-bar {
+    background: var(--bg-color);
+    border-radius: 15px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    outline: none;
+}
+
+.search-bar .material-icons-round {
+    color: var(--text-light);
+}
+
+/* Hero Banner */
+.hero-banner {
+    background: #263238;
+    /* Dark gray from image */
+    border-radius: var(--radius);
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 20px rgba(44, 62, 80, 0.3);
+}
+
+.hero-text h3 {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.hero-text p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-bottom: 12px;
+}
+
+.btn-hero {
+    background: var(--pastel-green);
+    color: #1b5e20;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Dashboard Grid - Pastel Cards */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2 columns */
+    gap: 16px;
+}
+
+.card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.card:active {
+    transform: scale(0.98);
+}
+
+.card-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.card-icon-box .material-icons-round {
+    font-size: 24px;
+}
+
+.card h3 {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.card p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Specific Card Styles */
+.card-symptom {
+    background-color: var(--pastel-pink);
+}
+
+.card-symptom .card-icon-box {
+    background: white;
+    color: #E91E63;
+}
+
+.card-mental {
+    background-color: var(--pastel-blue);
+}
+
+.card-mental .card-icon-box {
+    background: white;
+    color: #2196F3;
+}
+
+.card-lifestyle {
+    background-color: var(--pastel-orange);
+}
+
+.card-lifestyle .card-icon-box {
+    background: white;
+    color: #FF9800;
+}
+
+.card-sleep {
+    background-color: #E1BEE7;
+}
+
+.card-sleep .card-icon-box {
+    background: white;
+    color: #9C27B0;
+}
+
+
+/* Feature Views (Mental Health, Symptoms) */
+.view {
+    display: none;
+    padding-top: 20px;
+    animation: slideUp 0.3s ease;
+}
+
+.view.active {
+    display: block;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.chat-bubble {
+    background: var(--primary-light);
+    padding: 12px 16px;
+    border-radius: 16px 16px 16px 0;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+    max-width: 80%;
+}
+
+.chat-bubble.ai {
+    border-radius: 16px 16px 0 16px;
+    background: #E0E0E0;
+    margin-left: auto;
+}
+
+.symptom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.symptom-btn {
+    background: var(--bg-color);
+    border: 1px solid #eee;
+    padding: 16px 8px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.symptom-btn.selected {
+    background: var(--pastel-pink);
+    border-color: #E91E63;
+}
+
+/* Analysis Result */
+.analysis-result {
+    background: #E8F5E9;
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border-left: 4px solid #4CAF50;
+}
+
+
+/* Bottom Nav - Floating Style */
+.bottom-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: #263238;
+    /* Dark Pill */
+    padding: 12px 24px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: auto;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-item.active {
+    color: white;
+}
+
+.nav-item .material-icons-round {
+    font-size: 24px;
+}
+
+.nav-text {
+    font-size: 0.6rem;
+    margin-top: 2px;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.btn-primary {
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    margin-top: 20px;
+    font-weight: 600;
+}

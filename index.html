@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>HealthMate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- NEW HEADER -->
+    <header class="app-header" id="main-header">
+      <div class="user-profile">
+        <div class="avatar">👨‍⚕️</div>
+        <div class="user-info">
+          <h4>Good Morning,</h4>
+          <h2>Rajisha</h2>
+        </div>
+      </div>
+      <button class="icon-btn"><span class="material-icons-round">notifications_none</span></button>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="content-area">
+
+      <!-- VIEW: HOME DASHBOARD -->
+      <section id="view-home" class="view active">
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <span class="material-icons-round">search</span>
+          <input type="text" placeholder="Search health tips, symptoms...">
+        </div>
+
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+          <div class="hero-text">
+            <h3>Consult a Doctor</h3>
+            <p>Get expert advice instantly.</p>
+            <button class="btn-hero" onclick="openHelpline()">Schedule Now</button>
+          </div>
+        </div>
+
+        <div class="section-title">Your Health Tools</div>
+
+        <!-- 2-Column Grid -->
+        <div class="dashboard-grid">
+
+          <!-- New: Symptom Scan -->
+          <div class="card card-symptom" onclick="navigateTo('symptoms')">
+            <div class="card-icon-box">
+              <span class="material-icons-round">coronavirus</span>
+            </div>
+            <h3>Symptom Scan</h3>
+            <p>Quick Check</p>
+          </div>
+
+          <!-- New: Mental Health -->
+          <div class="card card-mental" onclick="navigateTo('mental')">
+            <div class="card-icon-box">
+              <span class="material-icons-round">psychology</span>
+            </div>
+            <h3>Mental Health</h3>
+            <p>AI Analyzer</p>
+          </div>
+
+          <!-- New: Lifestyle Score -->
+          <div class="card card-lifestyle" onclick="navigateTo('lifestyle')">
+            <div class="card-icon-box">
+              <span class="material-icons-round">accessibility_new</span>
+            </div>
+            <h3>Lifestyle Score</h3>
+            <p>Calculate</p>
+          </div>
+
+          <!-- Existing: Sleep -->
+          <div class="card card-sleep" onclick="navigateTo('sleep')">
+            <div class="card-icon-box">
+              <span class="material-icons-round">bedtime</span>
+            </div>
+            <h3>Sleep Tracker</h3>
+            <p><span id="dash-sleep">--</span> hrs</p>
+          </div>
+
+          <!-- Existing: Water -->
+          <div class="card" style="background:#E0F7FA;" onclick="navigateTo('water')">
+            <div class="card-icon-box" style="color:#00BCD4; background:white;">
+              <span class="material-icons-round">local_drink</span>
+            </div>
+            <h3>Hydration</h3>
+            <p><span id="dash-water">0</span>L / 2L</p>
+          </div>
+
+          <!-- Rewards Streak Link -->
+          <div class="card" style="background:#FFF3E0;" onclick="navigateTo('rewards')">
+            <div class="card-icon-box" style="color:#EF6C00; background:white;">
+              <span class="material-icons-round">local_fire_department</span>
+            </div>
+            <h3>Streak</h3>
+            <p><span id="streak-count">0</span> Days</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW: SYMPTOM SCAN QUICK CHECK -->
+      <section id="view-symptoms" class="view">
+        <div class="section-title">Common Symptoms</div>
+        <div class="symptom-grid">
+          <div class="symptom-btn" onclick="toggleSymptom(this, 'Headache')">🤕<span>Headache</span></div>
+          <div class="symptom-btn" onclick="toggleSymptom(this, 'Fever')">🌡️<span>Fever</span></div>
+          <div class="symptom-btn" onclick="toggleSymptom(this, 'Cough')">😷<span>Cough</span></div>
+          <div class="symptom-btn" onclick="toggleSymptom(this, 'Fatigue')">💤<span>Fatigue</span></div>
+          <div class="symptom-btn" onclick="toggleSymptom(this, 'Stomach')">🤢<span>Stomach</span></div>
+        </div>
+        <button class="btn-primary" onclick="analyzeSymptoms()">Analyze Symptoms</button>
+        <div id="symptom-result" class="analysis-result hidden"></div>
+      </section>
+
+      <!-- VIEW: MENTAL HEALTH AI -->
+      <section id="view-mental" class="view">
+        <div class="section-title">How are you feeling?</div>
+        <div class="chat-container">
+          <div class="chat-bubble ai">Hi Rajisha, I'm here to listen. Tell me what's on your mind.</div>
+        </div>
+        <textarea id="mental-input" placeholder="I'm feeling anxious about work..."
+          style="width:100%; border:1px solid #ddd; padding:12px; border-radius:12px; margin-top:12px; height:100px;"></textarea>
+        <button class="btn-primary" onclick="analyzeMental()">Analyze</button>
+        <div id="mental-result" class="analysis-result hidden"></div>
+      </section>
+
+      <!-- VIEW: LIFESTYLE SCORE -->
+      <section id="view-lifestyle" class="view">
+        <div class="section-title">Lifestyle Check</div>
+        <div style="background:white; padding:20px; border-radius:16px;">
+          <p style="margin-bottom:10px;">1. Did you exercise today?</p>
+          <div style="display:flex; gap:10px; margin-bottom:20px;">
+            <button class="btn-primary" style="margin-top:0; background:#ddd; color:#333;"
+              onclick="setQuiz(1, 1, this)">Yes</button>
+            <button class="btn-primary" style="margin-top:0; background:#ddd; color:#333;"
+              onclick="setQuiz(1, 0, this)">No</button>
+          </div>
+
+          <p style="margin-bottom:10px;">2. Did you eat fruits/veggies?</p>
+          <div style="display:flex; gap:10px; margin-bottom:20px;">
+            <button class="btn-primary" style="margin-top:0; background:#ddd; color:#333;"
+              onclick="setQuiz(2, 1, this)">Yes</button>
+            <button class="btn-primary" style="margin-top:0; background:#ddd; color:#333;"
+              onclick="setQuiz(2, 0, this)">No</button>
+          </div>
+
+          <p style="margin-bottom:10px;">3. Did you sleep 7+ hours?</p>
+          <div style="display:flex; gap:10px;">
+            <button class="btn-primary" style="margin-top:0; background:#ddd; color:#333;"
+              onclick="setQuiz(3, 1, this)">Yes</button>
+            <button class="btn-primary" style="margin-top:0; background:#ddd; color:#333;"
+              onclick="setQuiz(3, 0, this)">No</button>
+          </div>
+
+          <button class="btn-primary" onclick="calculateLifestyle()">Get Score</button>
+          <div id="lifestyle-result" class="analysis-result hidden"></div>
+        </div>
+      </section>
+
+      <!-- VIEW: WATER (Simplified) -->
+      <section id="view-water" class="view">
+        <div class="section-title">Water Tracker</div>
+        <div class="water-circle-container">
+          <div class="circular-progress" id="water-progress">
+            <div class="inner-circle">
+              <h1 id="water-amount">0L</h1>
+              <p>/ 2L</p>
+            </div>
+          </div>
+        </div>
+        <div class="water-controls">
+          <button class="btn-primary" style="width: auto; margin:0;" onclick="addWater(250)">+ 250ml</button>
+        </div>
+      </section>
+
+      <!-- VIEW: SLEEP (Simplified) -->
+      <section id="view-sleep" class="view">
+        <div class="section-title">Sleep Tracker</div>
+        <div class="input-group">
+          <label>Hours</label>
+          <input type="number" id="sleep-hours" placeholder="7">
+        </div>
+        <button class="btn-primary" onclick="logSleep()">Log Sleep</button>
+        <div id="sleep-chart" class="chart-container"></div>
+      </section>
+
+      <!-- VIEW: REWARDS -->
+      <section id="view-rewards" class="view">
+        <div class="section-title">Rewards</div>
+        <div class="reward-section">
+          <div class="tree-badge" id="tree-badge">
+            <span class="material-icons-round" style="font-size:64px; color:#ddd;">park</span>
+            <p>7 Day Streak Reward</p>
+          </div>
+          <div class="scratch-card-container" id="scratch-card" onclick="revealScratchCard()">
+            <div class="scratch-overlay">Scratch (30 Days)</div>
+            <div class="scratch-content">🎁</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FLOATING BOTTOM NAV / SIDEBAR -->
+    <nav class="bottom-nav">
+      <!-- Added Logo for Sidebar context in Desktop (Hidden on mobile via CSS if needed, or just let it handle) -->
+      <!-- Actually cleaner to just rely on nav items first -->
+      <button class="nav-item active" onclick="navigateTo('home')" data-label="Home">
+        <span class="material-icons-round">home</span>
+      </button>
+      <button class="nav-item" onclick="navigateTo('mental')" data-label="Mental Health">
+        <span class="material-icons-round">psychology</span>
+      </button>
+      <button class="nav-item" onclick="navigateTo('symptoms')" data-label="Symptoms">
+        <span class="material-icons-round">medical_services</span>
+      </button>
+      <button class="nav-item" onclick="navigateTo('rewards')" data-label="Rewards">
+        <span class="material-icons-round">emoji_events</span>
+      </button>
+    </nav>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
