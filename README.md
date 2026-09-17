@@ -62,14 +62,10 @@ Our team collaborated under a tight time constraint to design and build a user-f
 
 ### 👥 Team
 
-* **@raj-max-pixal** — Developer
-* **@rajisha** — Team Member
-* **@kamaai** — Team Member
+* **[Raj](https://github.com/Raj-max-pixal)** — Developer
+* **[@rajisha](https://github.com/rajishac67-ctrl)** — Team Member
+* **[@kamali](https://github.com/kamalibaskar2007)** — Team Member
 
 We worked together throughout the 6-hour challenge, from ideation and feature planning to development and final implementation.
 
 > 🚀 Built with teamwork, creativity, and a lot of code during a 6-hour hackathon!
-
-.action-btn {
-  animation: greyPulse 2s infinite ease-in-out;
-}
