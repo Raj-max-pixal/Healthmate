@@ -54,26 +54,21 @@
 
 ---
 
-## 🎨 Interactive CSS Animations
+## 🏆 Hackathon
 
-Enhance your web interface with these smooth keyframe animations in your `style.css` file:
+Healthmate was developed as part of a **6-hour hackathon conducted by Infosmite**.
 
-### 1. Grey Glow & Pulse Animation
-```css
-@keyframes greyPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(100, 100, 100, 0.4);
-  }
-  70% {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 10px rgba(100, 100, 100, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(100, 100, 100, 0);
-  }
-}
+Our team collaborated under a tight time constraint to design and build a user-friendly healthcare management web application focused on personal wellness tracking, symptom assessment, and access to healthcare resources.
+
+### 👥 Team
+
+* **@raj-max-pixal** — Developer
+* **@rajisha** — Team Member
+* **@kamaai** — Team Member
+
+We worked together throughout the 6-hour challenge, from ideation and feature planning to development and final implementation.
+
+> 🚀 Built with teamwork, creativity, and a lot of code during a 6-hour hackathon!
 
 .action-btn {
   animation: greyPulse 2s infinite ease-in-out;
